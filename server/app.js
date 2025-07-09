@@ -15,7 +15,7 @@ const notificationRoutes = require('./routes/notificationRoutes');
 const app = express();
 
 // Middleware
-app.use(cors({ origin: 'http://localhost:3000' })); // Allow frontend origin
+app.use(cors({ origin: 'http://localhost:5173' })); // Allow frontend origin
 app.use(express.json()); // Parse JSON request bodies
 
 // Routes

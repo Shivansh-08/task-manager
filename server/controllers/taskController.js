@@ -130,10 +130,27 @@ async function deleteTask(req, res) {
   }
 }
 
+async function getAllTasks(req, res) {
+  try {
+    // Find tasks where user is either creator or assignee
+    const tasks = await Task.find({
+      $or: [
+        { creator: req.userId },
+        { assignee: req.userId }
+      ]
+    }).populate('category', 'name');
+    
+    res.json(tasks);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch tasks' });
+  }
+}
+
 module.exports = {
   createTask,
   updateTask,
   assignTask,
   updateStatus,
   deleteTask,
+  getAllTasks  // Add this line
 };
